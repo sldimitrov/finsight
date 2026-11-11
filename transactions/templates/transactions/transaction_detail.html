@@ -1,0 +1,25 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}{{ transaction.description }} | FinSight{% endblock %}
+
+{% block content %}
+    <h1>{{ transaction.description }}</h1>
+    <dl>
+        <dt>Date</dt><dd>{{ transaction.date|date:"M j, Y" }}</dd>
+        <dt>Type</dt><dd>{{ transaction.get_type_display }}</dd>
+        <dt>Amount</dt><dd>{{ transaction.amount }} {{ transaction.account.currency }}</dd>
+        <dt>Account</dt><dd>{{ transaction.account.name }}</dd>
+        <dt>Category</dt><dd>{{ transaction.category|default:"—" }}</dd>
+        {% if transaction.source_account %}
+            <dt>Source account</dt><dd>{{ transaction.source_account.name }}</dd>
+        {% endif %}
+        {% if transaction.destination_account %}
+            <dt>Destination account</dt><dd>{{ transaction.destination_account.name }}</dd>
+        {% endif %}
+    </dl>
+    <p>
+        <a class="button" href="{% url 'transactions:edit_transaction' transaction.pk %}">Edit transaction</a>
+        <a href="{% url 'transactions:transaction_list' %}">Back to transactions</a>
+    </p>
+    <p><a class="button danger" href="{% url 'transactions:delete_transaction' transaction.pk %}">Delete transaction</a></p>
+{% endblock %}
