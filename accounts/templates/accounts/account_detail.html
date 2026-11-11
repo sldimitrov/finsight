@@ -1,0 +1,23 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}{{ account.name }} | FinSight{% endblock %}
+
+{% block content %}
+    <h1>{{ account.name }}</h1>
+    <dl>
+        <dt>Type</dt><dd>{{ account.get_type_display }}</dd>
+        <dt>Balance</dt><dd>{{ account.balance }} {{ account.currency }}</dd>
+    </dl>
+    <p>
+        <a class="button" href="{% url 'accounts:update' account.pk %}">Edit account</a>
+        <a href="{% url 'accounts:index' %}">Back to accounts</a>
+    </p>
+    {% if account.is_active %}
+        <form method="post" action="{% url 'accounts:deactivate' account.pk %}">
+            {% csrf_token %}
+            <button class="danger" type="submit">Deactivate account</button>
+        </form>
+    {% else %}
+        <p>This account is inactive.</p>
+    {% endif %}
+{% endblock %}
