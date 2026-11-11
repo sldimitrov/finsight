@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}FinSight{% endblock %}</title>
+    <style>
+        body { font: 16px/1.5 system-ui, sans-serif; margin: 2rem auto; max-width: 760px; padding: 0 1rem; color: #20252b; }
+        nav { display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 2rem; }
+        form p { margin: 1rem 0; }
+        label { display: block; font-weight: 600; }
+        input, select { box-sizing: border-box; font: inherit; max-width: 100%; padding: .5rem; }
+        button, .button { background: #1457a6; border: 0; border-radius: 4px; color: white; cursor: pointer; display: inline-block; font: inherit; padding: .55rem .9rem; text-decoration: none; }
+        .danger { background: #a32121; }
+        .errorlist { color: #a32121; }
+        dl { display: grid; grid-template-columns: 10rem 1fr; gap: .5rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'accounts:index' %}">FinSight accounts</a>
+        {% if request.user.is_authenticated %}
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+        {% endif %}
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

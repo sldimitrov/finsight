@@ -1,0 +1,17 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Your accounts | FinSight{% endblock %}
+
+{% block content %}
+    <h1>Your accounts</h1>
+    <p><a class="button" href="{% url 'accounts:create' %}">Create account</a></p>
+    {% if accounts %}
+        <ul>
+            {% for account in accounts %}
+                <li><a href="{% url 'accounts:detail' account.pk %}">{{ account.name }}</a> — {{ account.get_type_display }}, {{ account.balance }} {{ account.currency }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You don't have any active accounts yet.</p>
+    {% endif %}
+{% endblock %}
