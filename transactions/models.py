@@ -17,10 +17,10 @@ class Transaction(models.Model):
     description = models.CharField(max_length=255)
     category = models.CharField(max_length=100, blank=True, null=True)
     source_account = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="source_transactions", blank=True, null=True
+        Account, on_delete=models.PROTECT, related_name="source_transactions", blank=True, null=True
     )
     destination_account = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="destination_transactions", blank=True, null=True
+        Account, on_delete=models.PROTECT, related_name="destination_transactions", blank=True, null=True
     )
 
     def __str__(self):
