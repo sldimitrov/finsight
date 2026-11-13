@@ -1,4 +1,3 @@
-import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import get_object_or_404, redirect, render
@@ -50,8 +49,8 @@ def detail(request, account_id):
     )
 
 
-@transaction.atomic
 @login_required
+@transaction.atomic
 def create_transaction(request, account_id):
     account = get_object_or_404(Account, id=account_id, user=request.user, is_active=True)
     form = TransactionForm(request.POST if request.method == "POST" else None)
