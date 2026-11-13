@@ -17,9 +17,9 @@
             <dt>Destination account</dt><dd>{{ transaction.destination_account.name }}</dd>
         {% endif %}
     </dl>
+    <p class="hint">Transactions can't be edited. To fix a mistake, delete this one and add a new one.</p>
     <p>
-        <a class="button" href="{% url 'transactions:edit_transaction' transaction.pk %}">Edit transaction</a>
+        <a class="button danger" href="{% url 'transactions:delete_transaction' transaction.pk %}">Delete transaction</a>
         <a href="{% url 'transactions:transaction_list' %}">Back to transactions</a>
     </p>
-    <p><a class="button danger" href="{% url 'transactions:delete_transaction' transaction.pk %}">Delete transaction</a></p>
 {% endblock %}

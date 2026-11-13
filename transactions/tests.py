@@ -4,7 +4,7 @@ from users.models import User
 from .models import Transaction
 from accounts.models import Account
 
-# Create your tests here.
+
 class TransactionTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:

@@ -8,6 +8,5 @@ urlpatterns = [
     path("", views.transaction_list, name="transaction_list"),
     path("filter/", views.filter_transactions, name="filter_transactions"),
     path("<int:transaction_id>/", views.transaction_detail, name="transaction_detail"),
-    path("<int:transaction_id>/edit/", views.edit_transaction, name="edit_transaction"),
     path("<int:transaction_id>/delete/", views.delete_transaction, name="delete_transaction"),
 ]
