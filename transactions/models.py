@@ -25,3 +25,9 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.date} - {self.amount} - {self.description}"
+
+    def save(self, *args, **kwargs):
+        # Make sure the Transaction cannot be edited
+        if self.pk is not None:
+            raise ValueError("Transactions cannot be edited once created.")
+        super().save(*args, **kwargs)
