@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'transactions.apps.TransactionsConfig',
     'accounts.apps.AccountsConfig',
     'users.apps.UsersConfig',
     'django_extensions',
