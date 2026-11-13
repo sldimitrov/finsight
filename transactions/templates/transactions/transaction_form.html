@@ -1,0 +1,13 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Add transaction | {{ account.name }} | FinSight{% endblock %}
+
+{% block content %}
+    <h1>Add transaction to {{ account.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save transaction</button>
+        <a href="{% url 'accounts:detail' account.pk %}">Cancel</a>
+    </form>
+{% endblock %}
