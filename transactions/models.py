@@ -10,7 +10,7 @@ class Transaction(models.Model):
         ("adjustment", "Adjustment"),
     ]
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="transactions")
+    account = models.ForeignKey(Account, on_delete=models.PROTECT, related_name="transactions")
     date = models.DateField()
     type = models.CharField(max_length=10, choices=TRANSACTION_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
