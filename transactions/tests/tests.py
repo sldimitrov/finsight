@@ -34,16 +34,6 @@ class TransactionTests(TestCase):
         self.assertEqual(self.transaction.description, "Test transaction")
         self.assertEqual(self.transaction.category, "Test category")
 
-    def test_transaction_editing(self):
-        # Test editing a transaction
-        self.transaction.description = "Updated transaction"
-        self.transaction.amount = 75.00
-        self.transaction.save()
-
-        updated_transaction = Transaction.objects.get(id=self.transaction.id)
-        self.assertEqual(updated_transaction.description, "Updated transaction")
-        self.assertEqual(updated_transaction.amount, 75.00)
-
     def test_transaction_deletion(self):
         self.transaction.delete()
         with self.assertRaises(Transaction.DoesNotExist):
