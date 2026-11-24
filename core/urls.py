@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('accounts/', include("accounts.urls")),
@@ -24,4 +25,4 @@ urlpatterns = [
     path('users/', include("users.urls")),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/accounts/', permanent=False), name='index'),
-]
+] + debug_toolbar_urls()
