@@ -6,9 +6,15 @@
     <h1>Your accounts</h1>
     <p><a class="button" href="{% url 'accounts:create' %}">Create account</a></p>
     {% if accounts %}
-        <ul>
+        <ul class="account-grid">
             {% for account in accounts %}
-                <li><a href="{% url 'accounts:detail' account.pk %}">{{ account.name }}</a> - {{ account.get_type_display }}, {{ account.balance }} {{ account.currency }}</li>
+                <li>
+                    <a href="{% url 'accounts:detail' account.pk %}">
+                        <div class="name">{{ account.name }}</div>
+                        <div class="type">{{ account.get_type_display }}</div>
+                        <div class="balance">{{ account.balance }} {{ account.currency }}</div>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
