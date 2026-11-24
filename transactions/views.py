@@ -7,7 +7,7 @@ from .models import Transaction
 
 @login_required
 def transaction_list(request):
-    transactions = Transaction.objects.filter(account__user=request.user)
+    transactions = Transaction.objects.filter(account__user=request.user).prefetch_related("account").order_by("-date", "-pk")
     return render(request, "transactions/transaction_list.html", {"transactions": transactions})
 
 

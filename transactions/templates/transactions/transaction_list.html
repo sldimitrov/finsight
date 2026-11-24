@@ -5,15 +5,17 @@
 {% block content %}
     <h1>Transactions</h1>
 
-    <form method="get" action="{% url 'transactions:filter_transactions' %}">
-        <label for="transaction-type">Filter by type</label>
-        <select id="transaction-type" name="type">
+    <form class="filter-form" method="get" action="{% url 'transactions:filter_transactions' %}">
+        <div>
+            <label for="transaction-type">Filter by type</label>
+            <select id="transaction-type" name="type">
             <option value="">All types</option>
             <option value="income"{% if request.GET.type == "income" %} selected{% endif %}>Income</option>
             <option value="expense"{% if request.GET.type == "expense" %} selected{% endif %}>Expense</option>
             <option value="transfer"{% if request.GET.type == "transfer" %} selected{% endif %}>Transfer</option>
             <option value="adjustment"{% if request.GET.type == "adjustment" %} selected{% endif %}>Adjustment</option>
         </select>
+        </div>
         <button type="submit">Filter</button>
         {% if request.GET.type %}
             <a href="{% url 'transactions:transaction_list' %}">Clear filter</a>
@@ -38,7 +40,7 @@
                         <td><a href="{% url 'transactions:transaction_detail' transaction.pk %}">{{ transaction.description }}</a></td>
                         <td>{{ transaction.get_type_display }}</td>
                         <td>{{ transaction.account.name }}</td>
-                        <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                        <td class="{% if transaction.type == 'expense' %}transaction-expense{% elif transaction.type == 'income' %}transaction-income{% endif %}">{{ transaction.amount }} {{ transaction.account.currency }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
